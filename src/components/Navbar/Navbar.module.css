@@ -1,0 +1,70 @@
+/* Basic reset/normalize might be good in your global CSS, but this targets the component */
+.navbar {
+    background-color: #FFD700; /* A gold/bright yellow color similar to the image */
+    padding: 0.75rem 0; /* Add some top/bottom padding */
+    font-family: Arial, Helvetica, sans-serif; /* Example font */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional subtle shadow */
+    position: fixed; /* Fix the navbar at the top */
+    top: 0; /* Position at the top of the viewport */
+    left: 0; /* Ensure it starts from the left edge */
+    right: 0; /* Ensure it extends to the right edge */
+    width: 100%; /* Full width of the screen */
+    z-index: 1000; /* Ensure navbar stays above other content */
+}
+  
+  .navContent {
+    max-width: 1200px; /* Optional: Limit content width on large screens */
+    margin: 0 auto; /* Center content if max-width is used */
+    padding: 0 2rem; /* Horizontal padding inside the container */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center items */
+    justify-content: flex-start; /* Align items to the left */
+  }
+  
+  .logo {
+    margin-right: 2rem; /* Add space between logo and navigation links */
+  }
+  
+  .logoLink {
+    color: #000000; /* Black text color */
+    font-size: 1.8rem; /* Larger font size for logo */
+    font-weight: bold; /* Bold logo */
+    text-decoration: none; /* Remove underline from link */
+  }
+  
+  .navLinks {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Align link items horizontally */
+    align-items: center;
+    gap: 1.5rem; /* Space between "Home" and "Login" */
+  }
+  
+  .link {
+    color: #000000; /* Black text color */
+    text-decoration: none; /* Remove underline */
+    font-size: 1rem; /* Standard font size for links */
+    transition: color 0.2s ease; /* Smooth transition for hover */
+  }
+  
+  .link:hover {
+    color: #333333; /* Slightly darken color on hover */
+    /* or add text-decoration: underline; */
+  }
+  
+  /* --- Optional: Responsive Adjustments --- */
+  @media (max-width: 768px) {
+    .navContent {
+      padding: 0 1rem; /* Reduce padding on smaller screens */
+    }
+    .logoLink {
+      font-size: 1.5rem; /* Slightly smaller logo */
+    }
+    .navLinks {
+      gap: 1rem; /* Reduce gap between links */
+    }
+    .link {
+        font-size: 0.9rem; /* Slightly smaller links */
+    }
+  }

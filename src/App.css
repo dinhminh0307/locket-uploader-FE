@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  /* Optional: Ensure body takes full viewport width/height if needed elsewhere */
+  /* width: 100vw; */
+  /* min-height: 100vh; */
+}
+
+/* Add padding to prevent content from being hidden under the navbar */
+#root {
+  margin: 0;
+  padding-top: 60px; /* Adjust this value based on your navbar's height */
+  /* You might add other styles here later like display: flex if needed for overall layout */
+}
