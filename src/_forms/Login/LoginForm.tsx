@@ -5,26 +5,27 @@ import { LoginResponse } from '../../shared/interfaces/responses/LoginResponse';
 import { LoginRequest } from '../../shared/interfaces/requests/LoginRequest';
 import apiService from '../../services/api.service';
 import { secureStorage } from '../../services/secure-ls.service';
+import Loading from '../../shared/ui/loading/Loading.module';
+import { useAppDispatch } from '../../store/hooks';
+import { loginSuccess } from '../../store/slices/authSlice';
 
 const LoginForm: React.FC = () => {
   // State with TypeScript types
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
-  // Handle form submission - simplified
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default page reload on submit
-    // setError('');
-    // setIsLoading(true);
+    event.preventDefault();
+    setIsLoading(true);
 
     try {
-      // Prepare login request data
       const loginData: LoginRequest = {
         email,
         password
       };
 
-      // Send POST request to login endpoint
       const response = await apiService.post<LoginResponse>(
         API_ENDPOINTS.AUTH.LOGIN, 
         loginData
@@ -32,45 +33,27 @@ const LoginForm: React.FC = () => {
 
       console.log('Login successful:', response);
       
-      // Store both access and refresh tokens securely
       if (response.tokens && response.tokens.access && response.tokens.refresh) {
-        // Store the tokens with their expiration dates
-        secureStorage.setItem('accessToken', {
-          token: response.tokens.access.token,
-          expires: response.tokens.access.expires
-        });
+        // Extract username from email or use a default
+        const userName = email.split('@')[0] || 'User';
         
-        secureStorage.setItem('refreshToken', {
-          token: response.tokens.refresh.token,
-          expires: response.tokens.refresh.expires
-        });
+        // Dispatch login action to Redux
+        dispatch(loginSuccess({
+          user: {
+            name: userName,
+            email: email
+          },
+          tokens: response.tokens
+        }));
         
-        console.log('Tokens stored securely');
+        // Clear fields after successful login
+        setEmail('');
+        setPassword('');
       }
-
-        console.log('Tokens stored securely');
-
-        // Verify tokens were stored by trying to retrieve them
-        const storedAccessToken = secureStorage.getItem('accessToken');
-        const storedRefreshToken = secureStorage.getItem('refreshToken');
-
-        console.log('Retrieved access token:', storedAccessToken ? 'Token exists' : 'No token');
-        console.log('Retrieved refresh token:', storedRefreshToken ? 'Token exists' : 'No token');
-
-        // If you want to see the actual values (only in development)
-        console.log('Access token details:', storedAccessToken);
-        console.log('Refresh token details:', storedRefreshToken);
-      
-      
-      // Clear fields after successful login
-      setEmail('');
-      setPassword('');
     } catch (error) {
-      // Handle errors
       console.error('Login failed:', error);
-    //   setError(error instanceof Error ? error.message : 'Login failed. Please try again.');
     } finally {
-    //   setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -83,11 +66,11 @@ const LoginForm: React.FC = () => {
       setPassword(event.target.value);
   };
 
-
   return (
     // This outer div is used for centering the form container
     <div className={styles.pageContainer}>
       <div className={styles.formContainer}>
+      {isLoading && <Loading overlay message="Logging in..." />}
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <h2>Login</h2>
 

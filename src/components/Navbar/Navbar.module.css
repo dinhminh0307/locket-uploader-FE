@@ -12,59 +12,74 @@
     z-index: 1000; /* Ensure navbar stays above other content */
 }
   
+.navContent {
+  max-width: 1200px; /* Optional: Limit content width on large screens */
+  margin: 0 auto; /* Center content if max-width is used */
+  padding: 0 2rem; /* Horizontal padding inside the container */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically center items */
+  justify-content: space-between; /* Left side and right side */
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+}
+  
+.logo {
+  margin-right: 2rem; /* Add space between logo and navigation links */
+}
+  
+.logoLink {
+  color: #000000; /* Black text color */
+  font-size: 1.8rem; /* Larger font size for logo */
+  font-weight: bold; /* Bold logo */
+  text-decoration: none; /* Remove underline from link */
+}
+  
+.navLinks {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Align link items horizontally */
+  align-items: center;
+  gap: 1.5rem; /* Space between "Home" and "Login" */
+}
+  
+.link {
+  color: #000000; /* Black text color */
+  text-decoration: none; /* Remove underline */
+  font-size: 1rem; /* Standard font size for links */
+  transition: color 0.2s ease; /* Smooth transition for hover */
+}
+  
+.link:hover {
+  color: #333333; /* Slightly darken color on hover */
+  /* or add text-decoration: underline; */
+}
+
+.userSection {
+  margin-left: auto; /* Push to the right side */
+}
+
+.username {
+  font-weight: 500;
+  color: #000000;
+  font-size: 1rem;
+}
+  
+/* --- Optional: Responsive Adjustments --- */
+@media (max-width: 768px) {
   .navContent {
-    max-width: 1200px; /* Optional: Limit content width on large screens */
-    margin: 0 auto; /* Center content if max-width is used */
-    padding: 0 2rem; /* Horizontal padding inside the container */
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Vertically center items */
-    justify-content: flex-start; /* Align items to the left */
+    padding: 0 1rem; /* Reduce padding on smaller screens */
   }
-  
-  .logo {
-    margin-right: 2rem; /* Add space between logo and navigation links */
-  }
-  
   .logoLink {
-    color: #000000; /* Black text color */
-    font-size: 1.8rem; /* Larger font size for logo */
-    font-weight: bold; /* Bold logo */
-    text-decoration: none; /* Remove underline from link */
+    font-size: 1.5rem; /* Slightly smaller logo */
   }
-  
   .navLinks {
-    list-style: none; /* Remove default bullet points */
-    padding: 0;
-    margin: 0;
-    display: flex; /* Align link items horizontally */
-    align-items: center;
-    gap: 1.5rem; /* Space between "Home" and "Login" */
+    gap: 1rem; /* Reduce gap between links */
   }
-  
   .link {
-    color: #000000; /* Black text color */
-    text-decoration: none; /* Remove underline */
-    font-size: 1rem; /* Standard font size for links */
-    transition: color 0.2s ease; /* Smooth transition for hover */
+    font-size: 0.9rem; /* Slightly smaller links */
   }
-  
-  .link:hover {
-    color: #333333; /* Slightly darken color on hover */
-    /* or add text-decoration: underline; */
-  }
-  
-  /* --- Optional: Responsive Adjustments --- */
-  @media (max-width: 768px) {
-    .navContent {
-      padding: 0 1rem; /* Reduce padding on smaller screens */
-    }
-    .logoLink {
-      font-size: 1.5rem; /* Slightly smaller logo */
-    }
-    .navLinks {
-      gap: 1rem; /* Reduce gap between links */
-    }
-    .link {
-        font-size: 0.9rem; /* Slightly smaller links */
-    }
-  }
+}
