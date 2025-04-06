@@ -1,0 +1,142 @@
+/* Container to center the form on the page */
+.pageContainer {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    min-height: calc(100vh - 80px); /* Adjust 80px based on your actual Navbar height */
+    /* Alternatively, use padding-top if navbar is fixed/absolute: */
+    /* padding-top: 100px; */
+    /* padding-bottom: 20px; */
+    width: 100%;
+    background-color: #f8f9fa; /* Optional: light background for the whole page area */
+  }
+  
+  /* The actual form card */
+  .formContainer {
+    background-color: #ffffff; /* White background for the form card */
+    padding: 2rem 2.5rem; /* Padding inside the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid #eee; /* Light border like the image */
+    width: 100%;
+    max-width: 400px; /* Limit form width */
+    margin: 1rem; /* Add some margin for smaller screens */
+  }
+  
+  .loginForm {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 1.25rem; /* Space between form elements */
+  }
+  
+  .loginForm h2 {
+    text-align: center;
+    margin-bottom: 0.5rem; /* Extra space below heading */
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column; /* Stack label above input */
+    gap: 0.4rem; /* Space between label and input */
+  }
+  
+  .label {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .input {
+    width: 100%; /* Make input take full width of its container */
+    padding: 0.75rem 1rem; /* Padding inside input */
+    border: 1px solid #ced4da; /* Standard input border */
+    border-radius: 5px; /* Slightly rounded input corners */
+    font-size: 1rem;
+    box-sizing: border-box; /* Include padding and border in element's total width/height */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #FFD700; /* Highlight border on focus */
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.25); /* Subtle glow on focus */
+  }
+  
+  .submitButton {
+    background-color: #FFD700; /* Yellow background */
+    color: #000000; /* Black text */
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 0.5rem; /* Add some space above the button */
+  }
+  
+  .submitButton:hover:not(:disabled) {
+    background-color: #e6c300; /* Darker yellow on hover */
+  }
+  
+  .submitButton:active:not(:disabled) {
+      transform: scale(0.98); /* Slight shrink on click */
+  }
+  
+  .submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .errorMessage {
+      color: #dc3545; /* Bootstrap danger color */
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: -0.5rem; /* Reduce gap if error appears */
+      margin-bottom: -0.25rem;
+  }
+  
+  /* --- Optional: Adjustments for smaller screens --- */
+  @media (max-width: 480px) {
+      .formContainer {
+          padding: 1.5rem;
+      }
+      .loginForm h2 {
+          font-size: 1.6rem;
+      }
+      .submitButton {
+          font-size: 1rem;
+      }
+  }
+
+  /* Container to center the form on the page */
+.pageContainer {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    min-height: calc(100vh - 60px); /* Subtract the navbar height (60px from App.css) */
+    width: 100%;
+    background-color: #f8f9fa; /* Optional: light background for the whole page area */
+    position: absolute; /* Position absolutely to take up full space */
+    top: 60px; /* Start from below the navbar */
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* The actual form card */
+  .formContainer {
+    background-color: #ffffff; /* White background for the form card */
+    padding: 2rem 2.5rem; /* Padding inside the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid #eee; /* Light border like the image */
+    width: 100%;
+    max-width: 400px; /* Limit form width */
+    margin: 1rem; /* Add some margin for smaller screens */
+  }
+  
+  /* ...existing code... */
