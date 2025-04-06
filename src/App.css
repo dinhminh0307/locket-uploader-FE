@@ -22,3 +22,11 @@ body {
   align-items: center; /* Vertical centering */
   width: 100%;
 }
+
+/* Ensure no margins or padding on the body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+}

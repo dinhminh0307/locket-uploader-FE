@@ -5,6 +5,7 @@ import UploadForm from './components/Upload/Upload'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { useAppSelector } from './store/hooks'
+import Footer from './components/Footer/Footer'
 
 // This component will decide what to show based on auth state
 function AppContent() {
@@ -16,6 +17,7 @@ function AppContent() {
       <div className="content-container">
         {isAuthenticated ? <UploadForm /> : <LoginForm />}
       </div>
+      <Footer />
     </>
   );
 }

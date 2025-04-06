@@ -1,0 +1,76 @@
+.footer {
+    background-color: #FFD700; /* Same yellow as navbar */
+    color: #000000; /* Black text */
+    padding: 1rem 0; /* Vertical padding */
+    font-size: 0.875rem; /* Slightly smaller font size */
+    position: static; /* Remove relative positioning */
+    width: 100vw; /* Use viewport width instead of percentage */
+    margin-left: calc(-50vw + 50%); /* Trick to break out of containers */
+    margin-right: calc(-50vw + 50%);
+    box-sizing: content-box;
+    position: relative; /* Ensure it's in the normal flow */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0; /* Remove any margin */
+    border: 0; /* Remove any border */
+}
+  
+.footerContent {
+    max-width: 1200px; /* Optional: constrain content width */
+    margin: 0 auto; /* Center content if max-width is used */
+    padding: 0 2rem; /* Horizontal padding */
+    display: flex;
+    justify-content: space-between; /* Push copyright left, links right */
+    align-items: center; /* Vertically center items */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1rem; /* Add gap for wrapping */
+}
+  
+  .copyright {
+    text-align: center; /* Center text if it wraps */
+    flex-grow: 1; /* Allow copyright to take space if links wrap */
+  }
+  
+  .footerLinks {
+    /* Container for the links list */
+  }
+  
+  .footerLinks ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem; /* Space between links */
+    flex-wrap: wrap; /* Allow links to wrap */
+    justify-content: center; /* Center links if they wrap */
+  }
+  
+  .footerLinks li {
+    /* No specific styles needed for li */
+  }
+  
+  .link {
+    color: inherit; /* Inherit black color from footer */
+    text-decoration: none; /* Remove underline */
+    transition: text-decoration 0.2s ease;
+  }
+  
+  .link:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+  
+  /* --- Responsive Adjustments --- */
+  @media (max-width: 768px) {
+    .footerContent {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      justify-content: center; /* Center items when stacked */
+      padding: 0 1rem; /* Reduce horizontal padding */
+      gap: 0.75rem; /* Reduce gap when stacked */
+    }
+  
+    .footerLinks ul {
+      gap: 1rem; /* Reduce gap between links */
+      justify-content: center; /* Ensure links stay centered */
+    }
+  }
