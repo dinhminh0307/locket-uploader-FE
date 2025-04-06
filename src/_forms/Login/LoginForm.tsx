@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import styles from './LoginForm.module.css'; // Import CSS Module
-
-// Optional: Define props if you plan to pass any (like onLoginSuccess later)
-// interface LoginFormProps {
-//   onLoginSuccess?: () => void; // Example prop
-// }
-// Then use: const LoginForm: React.FC<LoginFormProps> = (props) => { ... }
-// For now, we don't need props for the simplified version.
+import { API_ENDPOINTS } from '../../shared/constanst/api';
+import { LoginResponse } from '../../shared/interfaces/responses/LoginResponse';
+import { LoginRequest } from '../../shared/interfaces/requests/LoginRequest';
+import apiService from '../../services/api.service';
 
 const LoginForm: React.FC = () => {
   // State with TypeScript types
@@ -14,20 +11,48 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState<string>('');
 
   // Handle form submission - simplified
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent default page reload on submit
+    // setError('');
+    // setIsLoading(true);
 
-    // Just log the credentials for now
-    console.log('Login attempt with:', {
-       email: email,
-       password: password // You can use shorthand: password
-    });
+    try {
+      // Prepare login request data
+      const loginData: LoginRequest = {
+        email,
+        password
+      };
 
-    // Clear fields after logging (optional)
-    // setEmail('');
-    // setPassword('');
+      // Send POST request to login endpoint
+      const response = await apiService.post<LoginResponse>(
+        API_ENDPOINTS.AUTH.LOGIN, 
+        loginData
+      );
 
-    // In the future, API call logic would go here
+      console.log('Login successful:', response);
+      
+      // Here you would typically:
+      // 1. Store the token in localStorage or a secure storage
+      // if (response.token) {
+      //   localStorage.setItem('authToken', response.token);
+      // }
+      
+      // 2. Update global auth state (e.g., with Context API or Redux)
+      
+      // 3. Redirect to dashboard or home page
+      // window.location.href = '/dashboard'; 
+      // OR using React Router: history.push('/dashboard');
+      
+      // Clear fields after successful login
+      setEmail('');
+      setPassword('');
+    } catch (error) {
+      // Handle errors
+      console.error('Login failed:', error);
+    //   setError(error instanceof Error ? error.message : 'Login failed. Please try again.');
+    } finally {
+    //   setIsLoading(false);
+    }
   };
 
   // Handle input changes with correct event types
