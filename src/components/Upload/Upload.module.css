@@ -1,0 +1,179 @@
+/* Optional: Reuse from LoginForm or define here */
+.pageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* Match LoginForm's height calculation */
+    background-color: #f8f9fa;
+    position: absolute; /* Add absolute positioning */
+    top: 60px; /* Start below navbar */
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+    
+  /* The rest of your CSS remains unchanged */
+  .formContainer {
+    background-color: #ffffff;
+    padding: 2rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    width: 100%;
+    max-width: 500px;
+    margin: 1rem;
+  }
+    
+  .uploadForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between title, dropzone, button */
+  }
+  
+  /* Add styles for image preview */
+  .imagePreviewContainer {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .imagePreview {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  
+  /* Adjust dropzone when it has a preview */
+  .hasPreview {
+    padding: 10px;
+    flex-direction: column;
+  }
+  
+  
+  .title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0rem; /* Reset default margin if gap handles spacing */
+  }
+  
+  /* --- Drop Zone --- */
+  .dropZone {
+    border: 2px dashed #ced4da; /* Dashed border */
+    border-radius: 8px;
+    padding: 2.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f8f9fa; /* Light background */
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    min-height: 150px; /* Ensure it has some height */
+  }
+  
+  .dropZone:hover {
+    border-color: #adb5bd;
+  }
+  
+  .dropZoneDraggingOver {
+    border-color: #FFD700; /* Highlight border when dragging over */
+    background-color: #fffbeb; /* Slightly yellow background */
+  }
+  
+  .icon {
+    width: 48px; /* Control size via CSS */
+    height: 48px;
+    color: #6c757d; /* Muted icon color */
+    margin-bottom: 0.8rem;
+  }
+  
+  .instructions {
+    font-size: 1rem;
+    color: #495057;
+    margin: 0.2rem 0;
+    font-weight: 500;
+  }
+  
+  .constraints {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin: 0.2rem 0;
+  }
+  
+  /* --- Selected File Display --- */
+  .fileInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap; /* Allow wrapping if name is long */
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  .fileNameLabel {
+      font-weight: 500;
+      color: #555;
+  }
+  
+  .fileName {
+    font-weight: bold;
+    max-width: 250px; /* Prevent super long names taking over */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .fileSize {
+      font-size: 0.85rem;
+      color: #6c757d;
+  }
+  
+  .removeFileButton {
+      background: none;
+      border: none;
+      color: #dc3545; /* Red for removal */
+      font-size: 1.5rem;
+      line-height: 1; /* Adjust line height for alignment */
+      cursor: pointer;
+      padding: 0 0.2rem; /* Minimal padding */
+      margin-left: 0.25rem;
+  }
+  .removeFileButton:hover {
+      color: #a02531;
+  }
+  
+  
+  /* --- Upload Button --- */
+  .uploadButton {
+    background-color: #FFD700;
+    color: #000000;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%; /* Make button full width */
+  }
+  
+  .uploadButton:hover:not(:disabled) {
+    background-color: #e6c300;
+  }
+  
+  .uploadButton:active:not(:disabled) {
+      transform: scale(0.98);
+  }
+  
+  .uploadButton:disabled {
+    background-color: #e9ecef; /* Lighter grey when disabled */
+    color: #adb5bd;
+    cursor: not-allowed;
+  }

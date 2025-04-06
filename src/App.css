@@ -1,15 +1,24 @@
+/* Base reset */
 body {
   margin: 0;
   padding: 0;
-  /* Optional: Ensure body takes full viewport width/height if needed elsewhere */
-  /* width: 100vw; */
-  /* min-height: 100vh; */
+  font-family: Arial, sans-serif;
 }
 
-/* Add padding to prevent content from being hidden under the navbar */
+/* Root element setup */
 #root {
   margin: 0;
-  padding-top: 60px; /* Adjust this value based on your navbar's height */
-  /* You might add other styles here later like display: flex if needed for overall layout */
+  padding-top: 60px; /* Space for fixed navbar */
+  min-height: 100vh; /* Full viewport height */
+  display: flex; /* Enable flex layout */
+  flex-direction: column; /* Stack children vertically */
 }
 
+/* Main content container style */
+.content-container {
+  flex: 1; /* Take up all available vertical space */
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  width: 100%;
+}

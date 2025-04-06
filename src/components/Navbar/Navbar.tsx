@@ -5,6 +5,9 @@ import { checkAuthState, logout } from '../../store/slices/authSlice';
 
 function Navbar() {
   const dispatch = useAppDispatch();
+
+  // useAppSelector allow to get needed piece of data from auth slice
+  // In this case is auth slice
   const { isAuthenticated, user } = useAppSelector(state => state.auth);
   
   // Check auth state when component mounts

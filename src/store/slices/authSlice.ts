@@ -12,19 +12,19 @@ interface AuthState {
 
 // Initialize state by checking storage for existing tokens
 const getInitialState = (): AuthState => {
-const accessToken: { token: string; expires: string } | null = secureStorage.getItem('accessToken');
-const userData = secureStorage.getItem('user');
-  
-  // Check if userData has the required name property
-  const user = userData && typeof userData === 'object' && 'name' in userData 
-    ? userData as { name: string; email?: string } 
-    : null;
-  
-  return {
-    isAuthenticated: !!accessToken,
-    user,
-    token: accessToken?.token || null
-  };
+    const accessToken: { token: string; expires: string } | null = secureStorage.getItem('accessToken');
+    const userData = secureStorage.getItem('user');
+    
+    // Check if userData has the required name property
+    const user = userData && typeof userData === 'object' && 'name' in userData 
+        ? userData as { name: string; email?: string } 
+        : null;
+    
+    return {
+        isAuthenticated: !!accessToken,
+        user,
+        token: accessToken?.token || null
+    };
 };
 
 const authSlice = createSlice({
