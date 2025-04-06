@@ -4,6 +4,7 @@ import { API_ENDPOINTS } from '../../shared/constanst/api';
 import { LoginResponse } from '../../shared/interfaces/responses/LoginResponse';
 import { LoginRequest } from '../../shared/interfaces/requests/LoginRequest';
 import apiService from '../../services/api.service';
+import { secureStorage } from '../../services/secure-ls.service';
 
 const LoginForm: React.FC = () => {
   // State with TypeScript types
@@ -31,17 +32,35 @@ const LoginForm: React.FC = () => {
 
       console.log('Login successful:', response);
       
-      // Here you would typically:
-      // 1. Store the token in localStorage or a secure storage
-      // if (response.token) {
-      //   localStorage.setItem('authToken', response.token);
-      // }
+      // Store both access and refresh tokens securely
+      if (response.tokens && response.tokens.access && response.tokens.refresh) {
+        // Store the tokens with their expiration dates
+        secureStorage.setItem('accessToken', {
+          token: response.tokens.access.token,
+          expires: response.tokens.access.expires
+        });
+        
+        secureStorage.setItem('refreshToken', {
+          token: response.tokens.refresh.token,
+          expires: response.tokens.refresh.expires
+        });
+        
+        console.log('Tokens stored securely');
+      }
+
+        console.log('Tokens stored securely');
+
+        // Verify tokens were stored by trying to retrieve them
+        const storedAccessToken = secureStorage.getItem('accessToken');
+        const storedRefreshToken = secureStorage.getItem('refreshToken');
+
+        console.log('Retrieved access token:', storedAccessToken ? 'Token exists' : 'No token');
+        console.log('Retrieved refresh token:', storedRefreshToken ? 'Token exists' : 'No token');
+
+        // If you want to see the actual values (only in development)
+        console.log('Access token details:', storedAccessToken);
+        console.log('Refresh token details:', storedRefreshToken);
       
-      // 2. Update global auth state (e.g., with Context API or Redux)
-      
-      // 3. Redirect to dashboard or home page
-      // window.location.href = '/dashboard'; 
-      // OR using React Router: history.push('/dashboard');
       
       // Clear fields after successful login
       setEmail('');
