@@ -1,5 +1,8 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import styles from './Upload.module.css'; // Import CSS Module
+import { secureStorage } from '../../services/secure-ls.service';
+import apiService from '../../services/api.service';
+import { API_ENDPOINTS } from '../../shared/constanst/api';
 
 const UploadForm: React.FC = () => {
   // State to hold the selected file (can be null if no file is selected)
@@ -12,6 +15,9 @@ const UploadForm: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [caption, setCaption] = useState<string>('');
+
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [uploadMessage, setUploadMessage] = useState<string>('');
 
   // Allowed file types and size limit (example)
   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
@@ -102,15 +108,91 @@ const UploadForm: React.FC = () => {
   }, []); // Dependencies: processFile (though it's stable here)
 
   // Handles the click on the main "Upload" button
-  const handleUploadClick = () => {
+  const handleUploadClick = async () => {
     if (!selectedFile) {
       alert('Please select a file to upload first.');
       return;
     }
+  
+    setIsUploading(true);
+    setUploadMessage('Uploading...');
+    
+    let timeOutId: number = 0;
+    
+    try {
+      // Get user from secure storage
+      const user = secureStorage.getItem<{id: string, email: string, name: string}>('user');
+      const accessToken = secureStorage.getItem<{token: string, expires: string}>('accessToken');
+      
+      if (!user || !accessToken) {
+        throw new Error('Authentication information missing. Please log in again.');
+      }
 
-    console.log('Simulating upload for file:', selectedFile.name);
-    console.log('File details:', selectedFile);
-
+      console.log('User:', user);
+  
+      // Create form data
+      const formData = new FormData();
+      
+      // Add file based on type
+      if (selectedFile.type.includes('image')) {
+        formData.append('image', selectedFile);  // CHANGED: 'images' to 'image'
+        timeOutId = setTimeout(() => {
+          setUploadMessage('Still uploading... Please wait, large files may take some time.');
+        }, 5000);
+      } else {
+        throw new Error('Unsupported file type');
+      }
+      
+      // Add caption to form data
+      formData.append('caption', caption);
+      
+      // Send the upload request WITH Authorization header
+      const response = await fetch(`${apiService['baseUrl']}/${API_ENDPOINTS.UPLOAD.IMAGE_UPLOAD}`, {
+        method: 'POST',
+        headers: {
+          // Add Authorization header with Bearer token
+          'Authorization': `Bearer ${accessToken.token}`,
+          // Add user ID in header
+          'X-User-ID': user.id
+        },
+        body: formData,
+        // Don't set Content-Type header - browser will add it automatically for FormData
+      });
+      
+      // Rest of your code remains the same...
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Upload failed: ${response.status} ${errorText}`);
+      }
+      
+      const result = await response.json();
+      
+      // Clear the selected file and caption on success
+      setSelectedFile(null);
+      setPreviewUrl(null);
+      setCaption('');
+      
+      // Show success message
+      setUploadMessage('Upload successful!');
+      console.log('Upload successful:', result);
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => {
+        setUploadMessage('');
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Upload failed:', error);
+      setUploadMessage(`Upload failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setUploadMessage('');
+      }, 5000);
+    } finally {
+      clearTimeout(timeOutId);
+      setIsUploading(false);
+    }
   };
 
   // Triggers the hidden file input when the drop zone is clicked
@@ -203,15 +285,22 @@ const UploadForm: React.FC = () => {
             </div>
           )}
 
+          {/* Status message */}
+        {uploadMessage && (
+          <div className={`${styles.statusMessage} ${uploadMessage.includes('failed') ? styles.error : ''}`}>
+            {uploadMessage}
+          </div>
+        )}
+
           {/* Upload Button */}
-          <button
-            type="button"
-            className={styles.uploadButton}
-            onClick={handleUploadClick}
-            disabled={!selectedFile}
-          >
-            Upload
-          </button>
+      <button
+        type="button"
+        className={styles.uploadButton}
+        onClick={handleUploadClick}
+        disabled={!selectedFile || isUploading}
+      >
+        {isUploading ? 'Uploading...' : 'Upload'}
+      </button>
         </div>
       </div>
     </div>

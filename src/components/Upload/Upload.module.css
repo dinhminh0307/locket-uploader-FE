@@ -215,3 +215,18 @@
 .captionField::placeholder {
   color: #adb5bd;
 }
+
+.statusMessage {
+  text-align: center;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.statusMessage.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
