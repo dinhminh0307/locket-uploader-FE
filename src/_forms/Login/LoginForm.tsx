@@ -19,32 +19,37 @@ const LoginForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-
+  
     try {
       const loginData: LoginRequest = {
         email,
         password
       };
-
+  
       const response = await apiService.post<LoginResponse>(
         API_ENDPOINTS.AUTH.LOGIN, 
         loginData
       );
-
+  
       console.log('Login successful:', response);
       
       if (response.tokens && response.tokens.access && response.tokens.refresh) {
-        // Extract username from email or use a default
-        const userName = email.split('@')[0] || 'User';
+        // Use the user information from the response
+        // If user data isn't complete in response, provide fallbacks
+        const userData = {
+          id: response.user?.id || 'unknown-id',
+          email: response.user?.email || email,
+          name: response.user?.name || email.split('@')[0] || 'User'
+        };
         
-        // Dispatch login action to Redux
+        // Dispatch login action to Redux with complete user data
         dispatch(loginSuccess({
-          user: {
-            name: userName,
-            email: email
-          },
+          user: userData,
           tokens: response.tokens
         }));
+        
+        // Store the complete user data in secure storage
+        secureStorage.setItem('user', userData);
         
         // Clear fields after successful login
         setEmail('');

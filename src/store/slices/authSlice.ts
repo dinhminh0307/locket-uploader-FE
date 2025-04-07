@@ -32,7 +32,7 @@ const authSlice = createSlice({
   initialState: getInitialState(),
   reducers: {
     loginSuccess: (state, action: PayloadAction<{
-      user: { name: string; email?: string };
+      user: { name: string; email?: string; id?: string };
       tokens: {
         access: { token: string; expires: string };
         refresh: { token: string; expires: string };
