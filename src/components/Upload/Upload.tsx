@@ -21,7 +21,7 @@ const UploadForm: React.FC = () => {
 
   // Allowed file types and size limit (example)
   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-  const maxSizeMB = 10;
+  const maxSizeMB = 50;
   const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
   // Create preview when file is selected and cleanup on unmount
