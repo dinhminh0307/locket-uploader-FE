@@ -11,6 +11,8 @@ const UploadForm: React.FC = () => {
   // Ref for the hidden file input element
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const [caption, setCaption] = useState<string>('');
+
   // Allowed file types and size limit (example)
   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
   const maxSizeMB = 10;
@@ -185,6 +187,21 @@ const UploadForm: React.FC = () => {
               </>
             )}
           </div>
+          {/* Caption field - only show when an image is selected */}
+          {selectedFile && (
+            <div className={styles.captionContainer}>
+              <label htmlFor="image-caption" className={styles.captionLabel}>
+                Caption
+              </label>
+              <textarea
+                id="image-caption"
+                className={styles.captionField}
+                placeholder="Add a caption for this image..."
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+              />
+            </div>
+          )}
 
           {/* Upload Button */}
           <button
