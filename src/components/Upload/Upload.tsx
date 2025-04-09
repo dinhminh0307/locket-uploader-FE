@@ -163,7 +163,7 @@ const UploadForm: React.FC = () => {
         throw new Error(`Upload failed: ${response.status} ${errorText}`);
       }
       
-      const result = await response.json();
+      // const result = await response.json();
       
       // Clear the selected file and caption on success
       setSelectedFile(null);
