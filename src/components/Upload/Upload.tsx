@@ -127,8 +127,6 @@ const UploadForm: React.FC = () => {
       if (!user || !accessToken) {
         throw new Error('Authentication information missing. Please log in again.');
       }
-
-      console.log('User:', user);
   
       // Create form data
       const formData = new FormData();
@@ -174,7 +172,6 @@ const UploadForm: React.FC = () => {
       
       // Show success message
       setUploadMessage('Upload successful!');
-      console.log('Upload successful:', result);
       
       // Clear success message after 3 seconds
       setTimeout(() => {

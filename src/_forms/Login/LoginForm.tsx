@@ -31,7 +31,6 @@ const LoginForm: React.FC = () => {
         loginData
       );
   
-      console.log('Login successful:', response);
       
       if (response.tokens && response.tokens.access && response.tokens.refresh) {
         // Use the user information from the response
