@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './Navbar.module.css';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { checkAuthState, logout } from '../../store/slices/authSlice';
