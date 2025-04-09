@@ -5,10 +5,11 @@ class SecureStorageService {
   private storage: SecureLS;
 
   constructor() {
+    const encryptionSecret = import.meta.env.VITE_LS_HASH_KEY;
     this.storage = new SecureLS({
       encodingType: 'aes',
       isCompression: false,
-      encryptionSecret: config.lsHashKey // Consider using an environment variable
+      encryptionSecret: encryptionSecret// Consider using an environment variable
     });
   }
 

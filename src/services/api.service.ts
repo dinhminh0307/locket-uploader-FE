@@ -9,7 +9,7 @@ class ApiService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = config.apiUrl;
+    this.baseUrl = import.meta.env.VITE_API_URL;
   }
 
   /**
