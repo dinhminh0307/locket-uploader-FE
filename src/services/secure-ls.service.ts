@@ -1,5 +1,4 @@
 import SecureLS from 'secure-ls';
-import config from '../shared/config.json';
 
 class SecureStorageService {
   private storage: SecureLS;

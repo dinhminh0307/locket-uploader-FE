@@ -1,4 +1,4 @@
-import config from '../shared/config.json';
+
 
 interface RequestOptions {
   headers?: HeadersInit;
